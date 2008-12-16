@@ -36,12 +36,12 @@ void Playfield::create()
 	inside->addItem(key);
 	
 	Item * table = new Item();
-	
-	outside->
+	table->setDescription("plain table");
+	outside->addItem(table);
 	
 	//create door
 	Door * door = new Door(outside, inside);
-	door->setDescription
+	door->setDescription("north emergency exit");
 	
 	inside->addDoor(door);
 	outside->addDoor(door);
@@ -53,7 +53,7 @@ void Playfield::create()
 	// add something to inventory;
 	Item * chair = new Item();
 	chair->setDescription("a plain chair");
-	player->addItem(chair);
+	//player->addItem(chair);
 
 	
 }

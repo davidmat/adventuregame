@@ -87,7 +87,7 @@ void OutputHandler::print(string messageId, ...)
 	}
 	else if(messageId=="look_doors")
 	{
-		cout << "You remember drom your training course at MI-6 that you're supposed to scan the room for exits." << endl;
+		cout << "You remember from your training course at MI-6 that you're supposed to scan the room for exits." << endl;
 		cout << "Reluctantly, you do so. There's:" << endl;
 	}
 		
