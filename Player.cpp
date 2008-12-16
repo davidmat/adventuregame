@@ -85,3 +85,12 @@ void Player::setMaxWeight(int maxW)
     this->maxWeight = maxW;
 }
 
+vector <Item *> Player::getInventory()
+{
+	return inventory;
+}
+
+void Player::addItem(Item * item)
+{
+	inventory.push_back(item);
+}

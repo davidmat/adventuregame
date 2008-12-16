@@ -20,6 +20,7 @@ public:
 	void addDoor(Door * door);
 	void addItem(Item * item);
 	vector <Door *> getDoors();
+	vector <Item *> getItems();
 	
 	string getObjectType(){ return "room";};
 	

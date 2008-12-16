@@ -19,22 +19,42 @@ void Playfield::create()
 {
 	// create player
 	player = new Player();
-	player->setName("Ceiling cat");
+	player->setName("You");
+	
 	// create rooms;
 	Room * outside = new Room();
 	outside->setDescription("outside");
 	rooms.push_back(outside);
+	
 	Room * inside = new Room();
 	inside->setDescription("inside");
 	rooms.push_back(inside);
+	
+	//add stuff to rooms
+	Item * key = new Item();
+	key->setDescription("useful key");
+	inside->addItem(key);
+	
+	Item * table = new Item();
+	
+	outside->
+	
 	//create door
 	Door * door = new Door(outside, inside);
+	door->setDescription
 	
 	inside->addDoor(door);
 	outside->addDoor(door);
 	
+	
 	// set player location
 	player->setCurrentRoom(outside);
+	
+	// add something to inventory;
+	Item * chair = new Item();
+	chair->setDescription("a plain chair");
+	player->addItem(chair);
+
 	
 }
 

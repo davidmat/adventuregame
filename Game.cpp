@@ -93,9 +93,65 @@ void Game::processCommand(vector <string> command)
 	// LOOK
 	else if(first=="look")
 	{
-		if(command.size()<3)
+		if(command.size()<2)
 		{
 			o->print("look_error");
+		} 
+		else
+		{
+			if(command[1]=="around")
+			{
+				o->print("look");
+				// describe the room
+				o->print("look_room");
+				cout << p->getPlayer()->getCurrentRoom()->getDescription()  << endl;
+				// describe the items you see
+				vector <Item*> items = p->getPlayer()->getCurrentRoom()->getItems();
+				if(items.size()>0)
+				{
+					o->print("look_contents");
+					vector<Item *>::iterator iter;
+					for (iter = items.begin(); iter!=items.end(); iter++)
+					{
+						cout << " * "<< (*iter)->getDescription() << endl;
+					} 
+				}
+				// describe the doors
+				vector <Door *> doors = p->getPlayer()->getCurrentRoom()->getDoors();
+				if(doors.size()>0)
+				{
+					o->print("look_doors");
+					vector<Door *>::iterator iter;
+					for (iter = doors.begin(); iter!=doors.end(); iter++)
+					{
+						cout << " * "<< (*iter)->getDescription() << endl;
+					} 
+				}
+				
+			}
+			else
+			{
+				o->print("look_error");
+			}
+		}
+	}
+	// INVENTORY
+	else if(first=="inventory")
+	{
+		vector <Item * > inv = p->getPlayer()->getInventory();
+		
+		if(inv.size()==0)
+		{
+			o->print("inventory_empty");
+		}
+		else
+		{
+			o->print("inventory");
+			vector<Item *>::iterator iter;
+			for (iter = inv.begin(); iter!=inv.end(); iter++)
+			{
+				cout << " * "<< (*iter)->getDescription() << endl;
+			} 
 		}
 	}
 		

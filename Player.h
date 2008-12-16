@@ -21,7 +21,10 @@ public:
 	void setCurrentRoom(Room *r);
 	int getMaxWeight();
 	void setMaxWeight(int);
+	vector <Item *> getInventory();
+	void addItem(Item * item);
 	string getObjectType(){ return "player";};
+	
 private:
 	Room* currentRoom;
 	string name;

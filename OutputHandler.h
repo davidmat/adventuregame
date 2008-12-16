@@ -6,6 +6,7 @@
 #include <iostream>
 #include <time.h>
 #include <stdlib.h>
+#include <cstdarg>
 
 using namespace std;
 
@@ -13,7 +14,7 @@ class OutputHandler
 {
 public:
       static OutputHandler* Instance();
-      void print(string messageId);
+      void print(string messageId, ...);
 protected:
       OutputHandler();
       OutputHandler(const OutputHandler&);

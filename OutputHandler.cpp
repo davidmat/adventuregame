@@ -15,7 +15,7 @@ OutputHandler::OutputHandler()
     srand( time(NULL) );
 }
 
-void OutputHandler::print(string messageId)
+void OutputHandler::print(string messageId, ...)
 {
 	if(messageId=="welcome")
 	{
@@ -27,7 +27,23 @@ void OutputHandler::print(string messageId)
 		cout << "Available commands: \n";
 		cout << " * help: displays help message \n";
 		cout << " * exit, quit: end the game \n";
-		cout << " * look at: looks at something" <<endl;
+		cout << " * look around: gives a description of your surroundings \n";
+		cout << " * inventory: tells you what's in your inventory \n"; 
+		
+		int choice = rand() % 3 + 1;
+		if(choice <=1)
+		{
+			cout << "You're welcome!" << endl;
+		}
+		else if(choice <=2)
+		{	
+			cout << "Glad to be of assistance." <<endl;
+		}
+		else
+		{
+			cout << "People who need help are weak." <<endl;
+		}
+		
 	}
 	else if(messageId=="goodbye") 
 	{
@@ -53,9 +69,35 @@ void OutputHandler::print(string messageId)
 		else
 		{
 			cout << "Your inferior intellect makes me weep" <<flush;
-			sleep(2);
+			sleep(1);
 			cout << "... tears of joy." <<endl;
 		}
+	}
+	else if(messageId=="look")
+	{
+		cout << "You decide to have a look around." << endl;
+	}
+	else if(messageId=="look_contents")
+	{
+		cout << "The room is full of stuff. You see: " << endl;
+	}
+	else if(messageId=="look_room")
+	{
+		cout << "You find yourself in a warm and happy place, more specifically: " << flush;
+	}
+	else if(messageId=="look_doors")
+	{
+		cout << "You remember drom your training course at MI-6 that you're supposed to scan the room for exits." << endl;
+		cout << "Reluctantly, you do so. There's:" << endl;
+	}
+		
+	else if(messageId=="inventory")
+	{
+		cout<< "Your inventory contains the following items: " << endl;
+	}
+	else if(messageId=="inventory_empty")
+	{
+		cout << "Oh noes. Teh Inventories... they are empty!" << endl; 
 	}	
 	else
 	{

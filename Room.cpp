@@ -35,6 +35,10 @@ vector <Door *> Room::getDoors()
     return this->doors;
 }
 
+vector <Item *> Room::getItems()
+{
+    return this->items;
+}
 
 
 
