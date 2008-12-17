@@ -121,10 +121,16 @@
     <property name="title" >
      <string>Adventure Game</string>
     </property>
+    <addaction name="actionBleh" />
    </widget>
    <addaction name="menuAdventure_Game" />
   </widget>
   <widget class="QStatusBar" name="statusbar" />
+  <action name="actionBleh" >
+   <property name="text" >
+    <string>bleh</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections>

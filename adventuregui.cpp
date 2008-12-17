@@ -1,6 +1,8 @@
 #include "adventuregui.h"
 #include "Game.h"
 
+#include <QtGui>
+
 #include <QHBoxLayout>
 #include <QPushButton>
 #include <QMessageBox>
@@ -11,7 +13,16 @@ adventureGUI::adventureGUI(QWidget *parent)
     : QWidget(parent)
 {
 	//ui.setupUi(this);
-	setLayout(new QHBoxLayout());
+	createSpinBoxes();
+	
+	
+	
+	
+
+	
+    QHBoxLayout *layout = new QHBoxLayout;
+    layout->addWidget(spinBoxesGroup);
+
 	
 	Playfield *p;
 	p = Playfield::Instance();
@@ -26,8 +37,11 @@ adventureGUI::adventureGUI(QWidget *parent)
 		QPushButton * btn = new QPushButton(naam, this);
 
 		connect(btn, SIGNAL(clicked()), this, SLOT(buttonClicked()));
-		layout()->addWidget(btn);
+		layout->addWidget(btn);
 	}
+	
+
+	setLayout(layout);
 }
 
 void adventureGUI::buttonClicked()
@@ -40,6 +54,45 @@ void adventureGUI::buttonClicked()
 		QMessageBox::information(0, "button clicked text", value);
 	}
 }
+
+void adventureGUI::createSpinBoxes()
+{
+    spinBoxesGroup = new QGroupBox(tr("Deuren"));
+
+    QLabel *integerLabel = new QLabel(tr("Enter a value between "
+        "%1 and %2:").arg(-20).arg(20));
+    QSpinBox *integerSpinBox = new QSpinBox;
+    integerSpinBox->setRange(-20, 20);
+    integerSpinBox->setSingleStep(1);
+    integerSpinBox->setValue(0);
+
+    QLabel *zoomLabel = new QLabel(tr("Enter a zoom value between "
+        "%1 and %2:").arg(0).arg(1000));
+    QSpinBox *zoomSpinBox = new QSpinBox;
+    zoomSpinBox->setRange(0, 1000);
+    zoomSpinBox->setSingleStep(10);
+    zoomSpinBox->setSuffix("%");
+    zoomSpinBox->setSpecialValueText(tr("Automatic"));
+    zoomSpinBox->setValue(100);
+
+    QLabel *priceLabel = new QLabel(tr("Enter a price between "
+        "%1 and %2:").arg(0).arg(999));
+    QSpinBox *priceSpinBox = new QSpinBox;
+    priceSpinBox->setRange(0, 999);
+    priceSpinBox->setSingleStep(1);
+    priceSpinBox->setPrefix("$");
+    priceSpinBox->setValue(99);
+
+    QVBoxLayout *spinBoxLayout = new QVBoxLayout;
+    spinBoxLayout->addWidget(integerLabel);
+    spinBoxLayout->addWidget(integerSpinBox);
+    spinBoxLayout->addWidget(zoomLabel);
+    spinBoxLayout->addWidget(zoomSpinBox);
+    spinBoxLayout->addWidget(priceLabel);
+    spinBoxLayout->addWidget(priceSpinBox);
+    spinBoxesGroup->setLayout(spinBoxLayout);
+}
+
 
 adventureGUI::~adventureGUI()
 {

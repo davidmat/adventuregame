@@ -4,6 +4,8 @@
 #include <QtGui/QWidget>
 #include "ui_adventuregui.h"
 
+class QGroupBox;
+
 class adventureGUI : public QWidget
 {
     Q_OBJECT
@@ -11,9 +13,14 @@ class adventureGUI : public QWidget
 public:
     adventureGUI(QWidget *parent = 0);
     ~adventureGUI();
+ 
 
 private:
     Ui::adventureGUIClass ui;
+    void createSpinBoxes();
+    
+    QGroupBox *spinBoxesGroup;
+    
     
 private slots:
    void buttonClicked();
