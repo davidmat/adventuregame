@@ -210,27 +210,26 @@ void Game::processCommand(vector <string> command)
 				}
 			}
 		}
-		// WIN
-		else if(first =="win")
-		{
-			o->print("win");
-		}
-		// CHUCK NORRIS
-		else if(first == "chuck" && command.size()>1);
-		{
-			if(command[1]=="norris")
-			{
-				o->print("chucknorris");
-			}
-			else
-			{
-				o->print("chuckwho");
-			}
-
-		}
-		
-		
 	}
+	// WIN
+	else if(first =="win")
+	{
+		o->print("win");
+	}
+	// CHUCK NORRIS
+	else if(first == "chuck" && command.size()>1);
+	{
+		if(command[1]=="norris")
+		{
+			o->print("chucknorris");
+		}
+		else
+		{
+			o->print("chuckwho");
+		}
+
+	}
+	
 	
 	// END OF COMMAND LIST	
 }		

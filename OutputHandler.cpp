@@ -119,7 +119,7 @@ void OutputHandler::print(string messageId, ...)
 	}
 	else if(messageId=="chucknorris")
 	{
-		
+		cout <<"";
 		
 	}
 	else if(messageId=="chuckwho")
@@ -128,6 +128,7 @@ void OutputHandler::print(string messageId, ...)
 		cout << "There is only ONE Chuck" << endl;
 		cout << "And he is not amused" << endl;
 		cout << "You lose 50Million HP (Chuck Norris Face Kick)" <<endl;  
+	}
 	else
 	{
 		cout << "Output not implemented yet " << endl;
