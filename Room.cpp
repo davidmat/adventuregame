@@ -19,6 +19,16 @@ string Room::getDescription()
     return this->description;
 }
 
+void Room::setExtendedDescription(string description)
+{
+    this->extendedDescription = description;
+}
+
+string Room::getExtendedDescription()
+{
+    return this->extendedDescription;
+}
+
 void Room::addDoor(Door * door)
 {
     doors.push_back(door);

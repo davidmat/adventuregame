@@ -26,9 +26,9 @@ private:
 	void processCommand(vector <string> s);
 	void initCommands();
 	bool isCommandValid(string command);
-	bool isCommandValidForObject(string command, string objectType);
+/*	bool isCommandValidForObject(string command, string objectType);
 	vector <string> getCommandsForObject(string objectType);
-	
+*/	
 	bool running;
 	vector <string> commandWords;
 	vector <vector <string> >	commandHistory;

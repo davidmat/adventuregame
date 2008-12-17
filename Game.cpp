@@ -52,6 +52,8 @@ void Game::play()
 	cout << door.getRoomOne()->getObjectType() <<endl;
 	cout << iphone.chucknorris();
 	*/
+
+	
 }
 
 void Game::processCommand(vector <string> command)
@@ -154,7 +156,21 @@ void Game::processCommand(vector <string> command)
 			} 
 		}
 	}
+	// DROP
+	else if(first=="drop")
+	{
+		if(command.size()<2)
+		{
+			o->print("invalid");
+		}
+		else
+		{
+			//get itemlist from the playfield...
+			
+		}
+			
 		
+	}	
 }
 
 void Game::initCommands()
@@ -188,7 +204,7 @@ bool Game::isCommandValid(string command)
 	return match;
 }
 
-bool Game::isCommandValidForObject(string command, string objectType)
+/* bool Game::isCommandValidForObject(string command, string objectType)
 {
 		return true;
 }
@@ -198,7 +214,7 @@ vector <string> Game::getCommandsForObject(string objectType)
 	vector <string> s;
 	return s;
 }
-
+*/
 Game::~Game()
 {
 }

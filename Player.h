@@ -23,6 +23,7 @@ public:
 	void setMaxWeight(int);
 	vector <Item *> getInventory();
 	void addItem(Item * item);
+	bool takeItem(Item *item);
 	string getObjectType(){ return "player";};
 	
 private:

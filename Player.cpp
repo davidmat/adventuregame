@@ -94,3 +94,20 @@ void Player::addItem(Item * item)
 {
 	inventory.push_back(item);
 }
+
+bool Player::takeItem(Item *item)
+{
+	vector<Item *>::iterator iter;
+	for (iter = inventory.begin(); iter!=inventory.end(); iter++)
+	{
+		if(*iter==item)
+		{
+			inventory.erase(iter);
+			return true;
+		
+		}
+	}
+	return false;	
+} 
+	
+	

@@ -15,14 +15,26 @@ class Playfield
 public:
       static Playfield* Instance();
       void create();
-      vector <Room *> getRooms();
       Player * getPlayer();
+      Room* getRoom(string description);
+      Door* getDoor(string description);
+      Item* getItem(string description);
+
 protected:
       Playfield();
       Playfield(const Playfield&);
       Playfield& operator= (const Playfield&);
+
 private:
+	  void setPlayer(string name);
+	  Room * addRoom(string description, string extendedDefinition);
+	  Door * addDoor(string description, Room * roomOne, Room * roomTwo, bool locked, Item * key);
+	  Item* addItemToRoom(string description, Room* room);
+	  Item* addItemToInventory(string description);  	
+
       vector <Room *> rooms;
+      vector <Door *> doors;
+      vector <Item *> items;
       Player * player;
       static Playfield* pinstance;
 

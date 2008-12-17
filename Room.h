@@ -17,6 +17,8 @@ public:
 	virtual ~Room();
 	string getDescription();
 	void setDescription(string);
+	string getExtendedDescription;
+	void setExtendedDescription;
 	void addDoor(Door * door);
 	void addItem(Item * item);
 	vector <Door *> getDoors();
@@ -26,6 +28,7 @@ public:
 	
 private:
 	string description;
+	string extendedDescription;
 	vector <Door *> doors;
 	vector <Item *> items;	
 };
