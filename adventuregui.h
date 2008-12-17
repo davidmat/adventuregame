@@ -1,10 +1,10 @@
 #ifndef ADVENTUREGUI_H
 #define ADVENTUREGUI_H
 
-#include <QtGui/QMainWindow>
+#include <QtGui/QWidget>
 #include "ui_adventuregui.h"
 
-class adventureGUI : public QMainWindow
+class adventureGUI : public QWidget
 {
     Q_OBJECT
 
@@ -14,6 +14,9 @@ public:
 
 private:
     Ui::adventureGUIClass ui;
+    
+private slots:
+   void buttonClicked();
 };
 
 #endif // ADVENTUREGUI_H
