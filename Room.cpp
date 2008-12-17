@@ -50,5 +50,19 @@ vector <Item *> Room::getItems()
     return this->items;
 }
 
+bool Room::takeItem(Item *item)
+{
+	vector<Item *>::iterator iter;
+	for (iter = items.begin(); iter!=items.end(); iter++)
+	{
+		if(*iter==item)
+		{
+			items.erase(iter);
+			return true;
+		
+		}
+	}
+	return false;	
+} 
 
 

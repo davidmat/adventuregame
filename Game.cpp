@@ -97,7 +97,7 @@ void Game::processCommand(vector <string> command)
 	{
 		if(command.size()<2)
 		{
-			o->print("look_error");
+			o->print("invalid");
 		} 
 		else
 		{
@@ -107,6 +107,8 @@ void Game::processCommand(vector <string> command)
 				// describe the room
 				o->print("look_room");
 				cout << p->getPlayer()->getCurrentRoom()->getDescription()  << endl;
+				// extended description
+				// -> cout << p->getPlayer()->getCurrentRoom()->getExtendedDescription()<<endl;
 				// describe the items you see
 				vector <Item*> items = p->getPlayer()->getCurrentRoom()->getItems();
 				if(items.size()>0)
@@ -158,20 +160,81 @@ void Game::processCommand(vector <string> command)
 	}
 	// DROP
 	else if(first=="drop")
-	{
+	{		
 		if(command.size()<2)
 		{
 			o->print("invalid");
 		}
 		else
 		{
-			//get itemlist from the playfield...
-			
+			//get itemlist from the playfield..
+			Item * item = p->getItem(command[1]);
+			if(item == NULL)
+			{
+				o->print("invalid");
+			}
+			else
+			{
+				if(p->getPlayer()->takeItem(item))
+				{
+					o->print("drop");
+					cout << item->getDescription() << endl;
+					p->getPlayer()->getCurrentRoom()->addItem(item);
+				}
+			}
 		}
-			
 		
-	}	
-}
+	}
+	// TAKE	
+	else if(first=="take")
+	{		
+		if(command.size()<2)
+		{
+			o->print("invalid");
+		}
+		else
+		{
+			//get itemlist from the playfield..
+			Item * item = p->getItem(command[1]);
+			if(item == NULL)
+			{
+				o->print("invalid");
+			}
+			else
+			{
+				if(p->getPlayer()->getCurrentRoom()->takeItem(item))
+				{
+					o->print("take");
+					cout << item->getDescription() << endl;
+					p->getPlayer()->addItem(item);
+				}
+			}
+		}
+		// WIN
+		else if(first =="win")
+		{
+			o->print("win");
+		}
+		// CHUCK NORRIS
+		else if(first == "chuck" && command.size()>1);
+		{
+			if(command[1]=="norris")
+			{
+				o->print("chucknorris");
+			}
+			else
+			{
+				o->print("chuckwho");
+			}
+
+		}
+		
+		
+	}
+	
+	// END OF COMMAND LIST	
+}		
+
 
 void Game::initCommands()
 {
@@ -179,13 +242,13 @@ void Game::initCommands()
 	commandWords.push_back("help");
 	commandWords.push_back("quit"); 
 	commandWords.push_back("look");
-	commandWords.push_back("pick");
-	commandWords.push_back("use");
+	commandWords.push_back("take");
+	//commandWords.push_back("use");
 	commandWords.push_back("open");
 	commandWords.push_back("go");
-	commandWords.push_back("unlock");
+	//commandWords.push_back("unlock");
 	commandWords.push_back("drop");
-	commandWords.push_back("lock");
+	//commandWords.push_back("lock");
 	commandWords.push_back("chuck");
 	commandWords.push_back("win");
 	commandWords.push_back("inventory");	

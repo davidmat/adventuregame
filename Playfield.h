@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <iostream>
 #include "Room.h"
 #include "Item.h"
 #include "Door.h"

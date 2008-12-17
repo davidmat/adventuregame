@@ -29,6 +29,8 @@ void OutputHandler::print(string messageId, ...)
 		cout << " * exit, quit: end the game \n";
 		cout << " * look around: gives a description of your surroundings \n";
 		cout << " * inventory: tells you what's in your inventory \n"; 
+		cout << " * drop <item>: takes an item from your inventory and drops it on the floor \n";
+		cout << " * take <item>: pick up a item and put in in your inventory \n";
 		
 		int choice = rand() % 3 + 1;
 		if(choice <=1)
@@ -98,7 +100,34 @@ void OutputHandler::print(string messageId, ...)
 	else if(messageId=="inventory_empty")
 	{
 		cout << "Oh noes. Teh Inventories... they are empty!" << endl; 
-	}	
+	}
+	else if(messageId=="drop")
+	{
+		cout << "You drop " << flush;
+	}
+	else if(messageId=="take")
+	{
+		cout << "Your mom comes running in and suddenly a new item appears in your backpack \n";
+		cout << "Oh yeah, and it also seems to have disappeared from the room \n";
+		cout << "Nevertheless, you decide to thoroughly enjouy your new " << flush;
+	}
+	else if(messageId=="win")
+	{
+		cout <<"You win!" << endl;
+		cout <<"It doesn't seem to have changed anything" <<endl;
+		cout <<"Still, it did make you feel a little better inside" << endl;
+	}
+	else if(messageId=="chucknorris")
+	{
+		
+		
+	}
+	else if(messageId=="chuckwho")
+	{
+		cout << "Chuck WHO?" << endl;
+		cout << "There is only ONE Chuck" << endl;
+		cout << "And he is not amused" << endl;
+		cout << "You lose 50Million HP (Chuck Norris Face Kick)" <<endl;  
 	else
 	{
 		cout << "Output not implemented yet " << endl;

@@ -35,14 +35,16 @@ vector <string> Parser::getInput()
     {
             word1= string.substr(0, blanco);
             word2 = string.substr(blanco+1, string.length());
+            input.push_back(word1);
+            input.push_back(word2);
     }
     else
     {
             word1 = string;
-            word2 = "null";
+            input.push_back(word1);
     }
-    input.push_back(word1);
-    input.push_back(word2);
+
+    
 
     return input;
 }

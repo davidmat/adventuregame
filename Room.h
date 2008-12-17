@@ -23,7 +23,7 @@ public:
 	void addItem(Item * item);
 	vector <Door *> getDoors();
 	vector <Item *> getItems();
-	
+	bool takeItem(Item * item);
 	string getObjectType(){ return "room";};
 	
 private:
