@@ -18,43 +18,25 @@ Playfield::Playfield()
 void Playfield::create()
 {
 	// create player
-	player = new Player();
-	player->setName("You");
+	setPlayer("ceiling cat");
 	
 	// create rooms;
-	Room * outside = new Room();
-	outside->setDescription("outside");
-	rooms.push_back(outside);
+	Room* outside = addRoom("outside", "You are outside, where the trees are");
 	
-	Room * inside = new Room();
-	inside->setDescription("inside");
-	rooms.push_back(inside);
+	Room * inside = addRoom("inside", "You are inside. There are no more trees here");
 	
 	//add stuff to rooms
-	Item * key = new Item();
-	key->setDescription("useful key");
-	inside->addItem(key);
-	
-	Item * table = new Item();
-	table->setDescription("plain table");
-	outside->addItem(table);
+	Item * key = addItemToRoom("useful key", inside);
+	Item * table = addItemToRoom("table", outside);
 	
 	//create door
-	Door * door = new Door(outside, inside);
-	door->setDescription("north emergency exit");
-	
-	inside->addDoor(door);
-	outside->addDoor(door);
-	
+	Door * door = addDoor("an entrance", outside, inside, true, key);
 	
 	// set player location
-	player->setCurrentRoom(outside);
+	player->setCurrentRoom(inside);
 	
 	// add something to inventory;
-	Item * chair = new Item();
-	chair->setDescription("a plain chair");
-	//player->addItem(chair);
-
+	Item * chair = addItemToInventory("a plain chair");
 	
 }
 
@@ -124,8 +106,10 @@ Door * Playfield::addDoor(string description, Room * roomOne, Room * roomTwo, bo
 {
 	Door * door = new Door();
 	door->setDescription(description);
-	door->setRoomOne(roomOne):
+	door->setRoomOne(roomOne);
+	roomOne->addDoor(door);
 	door->setRoomTwo(roomTwo);
+	roomTwo->addDoor(door);
 	if(locked)
 	{
 		door->lock(key);
@@ -144,6 +128,17 @@ Item* Playfield::addItemToRoom(string description, Room* room)
 	
 	return item;
 }
+
+Item* Playfield::addItemToInventory(string description)
+{
+	Item * item = new Item();
+	item->setDescription(description);
+	player->addItem(item);
+	items.push_back(item);
+	
+	return item;
+}
+
 
 
 /*	  Room * addRoom(string description);
