@@ -217,19 +217,54 @@ void Game::processCommand(vector <string> command)
 		o->print("win");
 	}
 	// CHUCK NORRIS
-	else if(first == "chuck" && command.size()>1);
+	else if((first == "chuck") && (command.size()>1))
 	{
 		if(command[1]=="norris")
 		{
 			o->print("chucknorris");
+			running = false;
 		}
 		else
 		{
 			o->print("chuckwho");
+			
 		}
 
 	}
-	
+	// OPEN
+	else if (first == "open")
+	{
+		if(command.size()<2)
+		{
+			o->print("invalid");
+		}
+		else
+		{
+			//get doors from the playfield..
+			Door * door = p->getDoor(command[1]);
+			if(door == NULL)
+			{
+				o->print("invalid");
+			}
+			else
+			{
+				// TOOODOOO
+				/*
+				if(p->getPlayer()->getCurrentRoom()->takeItem(item))
+				{
+					o->print("take");
+					cout << item->getDescription() << endl;
+					p->getPlayer()->addItem(item);
+				}
+				*/
+			}
+		}
+	}
+	// INVALID
+	else
+	{
+		o->print("invalid");
+	}
 	
 	// END OF COMMAND LIST	
 }		
@@ -244,7 +279,7 @@ void Game::initCommands()
 	commandWords.push_back("take");
 	//commandWords.push_back("use");
 	commandWords.push_back("open");
-	commandWords.push_back("go");
+	//commandWords.push_back("go");
 	//commandWords.push_back("unlock");
 	commandWords.push_back("drop");
 	//commandWords.push_back("lock");

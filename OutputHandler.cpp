@@ -31,6 +31,7 @@ void OutputHandler::print(string messageId, ...)
 		cout << " * inventory: tells you what's in your inventory \n"; 
 		cout << " * drop <item>: takes an item from your inventory and drops it on the floor \n";
 		cout << " * take <item>: pick up a item and put in in your inventory \n";
+		cout << " * open <door>: walkt through the rectangular hole of your choice into the next room \n";
 		
 		int choice = rand() % 3 + 1;
 		if(choice <=1)
@@ -119,7 +120,18 @@ void OutputHandler::print(string messageId, ...)
 	}
 	else if(messageId=="chucknorris")
 	{
-		cout <<"";
+		cout <<"Chuck Norris doesn’t wear a watch, HE decides what .." << endl;
+		sleep(2);
+		cout <<"Oh no" << endl;
+		sleep(2);
+		cout <<"It's the Chuck... he's heeeeerrreeeee!!!" << endl;
+		sleep(2);
+		cout <<"CHUCK NORRIS SAYS: WHEN CHUCK NORRIS TALKS,EVERYBODY LISTENS." << endl;
+		sleep(4);
+		cout<<"AND DIES" << endl;
+		cout<< "*roundhouse kick*" <<endl;
+		cout<<"-- fly, zOOf, Boom, spLAT -- "<< endl;
+		cout<<"CHUCK NORRIS SAYS: GAME OVER SUCKA" << endl;
 		
 	}
 	else if(messageId=="chuckwho")
