@@ -32,6 +32,9 @@ void Playfield::create()
 	//create door
 	Door * door = addDoor("an entrance", outside, inside, true, key);
 	
+	//create second door
+	Door * door2 = addDoor("an exit", outside, inside, true, key);
+	
 	// set player location
 	player->setCurrentRoom(inside);
 	
