@@ -240,23 +240,61 @@ void Game::processCommand(vector <string> command)
 		}
 		else
 		{
+			vector <Item * > inv = p->getPlayer()->getInventory();
+			Room * currentRoom = p->getPlayer()->getCurrentRoom();
+			
 			//get doors from the playfield..
+			
 			Door * door = p->getDoor(command[1]);
 			if(door == NULL)
 			{
+				// door does not exist
 				o->print("invalid");
 			}
 			else
 			{
-				// TOOODOOO
-				/*
-				if(p->getPlayer()->getCurrentRoom()->takeItem(item))
+				// door exists, is it locked?   
+    			if(door->isLocked())
+    			{
+    				Item * key = door->getKey();
+    				bool found = false;
+        			o->print("open_locked");
+        			// check inventory for key
+        			vector<Item *>::iterator iter;
+					for (iter = inv.begin(); iter!=inv.end(); iter++)
+					{
+						if((*iter) == key)
+						{
+							found = true;
+						}
+					}
+					if(found)
+					{
+						o->print("open_key");
+						door->unlock(key);
+					}
+					else
+					{
+						o->print("open_nokey");
+					} 
+        			
+       		        
+    			}
+    			if(!door->isLocked())
 				{
-					o->print("take");
-					cout << item->getDescription() << endl;
-					p->getPlayer()->addItem(item);
+					o->print("open_unlocked");
+					Room * r1 = door->getRoomOne();
+        			Room * r2 = door->getRoomTwo();
+        			if(currentRoom == r1)
+        			{
+            			p->getPlayer()->setCurrentRoom(r2);
+        			}
+        			else if (currentRoom == r2)
+        			{
+            			p->getPlayer()->setCurrentRoom(r1);
+            		}
 				}
-				*/
+					
 			}
 		}
 	}

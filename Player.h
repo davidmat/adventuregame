@@ -16,7 +16,6 @@ public:
 	virtual ~Player();
 	void setName(string);
 	string getName();
-	int move(Door *d);
 	Room * getCurrentRoom();
 	void setCurrentRoom(Room *r);
 	int getMaxWeight();

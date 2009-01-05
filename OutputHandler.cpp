@@ -31,7 +31,7 @@ void OutputHandler::print(string messageId, ...)
 		cout << " * inventory: tells you what's in your inventory \n"; 
 		cout << " * drop <item>: takes an item from your inventory and drops it on the floor \n";
 		cout << " * take <item>: pick up a item and put in in your inventory \n";
-		cout << " * open <door>: walkt through the rectangular hole of your choice into the next room \n";
+		cout << " * open <door>: walk, through the rectangular hole of your choice, into the next room \n";
 		
 		int choice = rand() % 3 + 1;
 		if(choice <=1)
@@ -141,6 +141,30 @@ void OutputHandler::print(string messageId, ...)
 		cout << "And he is not amused" << endl;
 		cout << "You lose 50Million HP (Chuck Norris Face Kick)" <<endl;  
 	}
+	else if(messageId=="open_locked")
+	{
+		cout << "Fiercly, you try to open the door." << endl;
+		cout << "Sadly, it seems locked." << endl;
+		cout << "Luckily, there is a rocket launcher standing right next to it. " << endl;
+		cout << "Forcefully, you pick up the rocket launcher and prepare to blow up the door" << endl;
+		cout << "Angrily, you notice that the rocket launcher requires a key to get it started" << endl;
+		 
+	}
+	else if(messageId=="open_unlocked")
+	{
+		cout << "You walk through the door" << endl;
+	}
+	else if(messageId=="open_key")
+	{
+		cout << "You find the correct key in your inventory and put it in the rocket launcher" << endl;
+		cout << "It starts up beautifully and kindly opens the door for you. " << endl;
+		cout << "Thank you rocket launcher!" << endl;
+	}
+	else if(messageId=="open_nokey")
+	{
+		cout << "But, then, suddenly, unexpectedly, in a bizarre plot twist, it seems... * tum dum tum *" << endl;
+		cout << "You have key!" << endl;
+	}	 
 	else
 	{
 		cout << "Output not implemented yet " << endl;
