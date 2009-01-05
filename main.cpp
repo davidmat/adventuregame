@@ -10,13 +10,14 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-	Game game;
+	
 	if(argc>1)
 	{
 		string argument = string(argv[1]);
 	
     	if(argument=="-c")
     	{
+    		Game game;
     		game.play();
     	
     		return 1;

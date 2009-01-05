@@ -3,6 +3,7 @@
 
 #include <QtGui/QWidget>
 #include "ui_adventuregui.h"
+#include "Game.h"
 
 class QGroupBox;
 
@@ -13,13 +14,15 @@ class adventureGUI : public QWidget
 public:
     adventureGUI(QWidget *parent = 0);
     ~adventureGUI();
- 
+ 	Game game;
+	
 
 private:
     Ui::adventureGUIClass ui;
     void createItemButtons();
     void createDoorButtons();
     void createInventoryButtons();
+    void paint();
     
     QGroupBox *itemButtons;
     QGroupBox *doorButtons;
@@ -27,7 +30,9 @@ private:
     
     
 private slots:
-   void buttonClicked();
+   void doorButtonClicked();
+   void inventoryButtonClicked();
+   void itemButtonClicked();
 };
 
 #endif // ADVENTUREGUI_H

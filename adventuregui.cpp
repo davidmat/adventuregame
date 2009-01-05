@@ -2,7 +2,7 @@
 #include "Game.h"
 
 #include <QtGui>
-
+#include <QList>
 #include <QHBoxLayout>
 #include <QPushButton>
 #include <QMessageBox>
@@ -12,30 +12,44 @@ using namespace std;
 adventureGUI::adventureGUI(QWidget *parent)
     : QWidget(parent)
 {
-	
+
 	// TODO: add pixmap van room
 	// links buttons met move, pickup, drop...
 	// soort van tekst terminal?
 	
 	//ui.setupUi(this);
 	
-	Playfield *p;
-	p = Playfield::Instance();
+	setLayout(new QHBoxLayout);
+	paint();
+}
+
+void adventureGUI::paint()
+{
+	QList<QObject*> child = children();
+	for(int i = 0; i < child.count(); i++)
+		if(child[i]->isWidgetType())
+	  		child[i]->deleteLater();   
 	
 	createItemButtons();
 	createDoorButtons();
 	createInventoryButtons();
-	
-    QHBoxLayout *layout = new QHBoxLayout;
+	    
+    layout()->addWidget(itemButtons);
+    layout()->addWidget(doorButtons);
+    layout()->addWidget(inventoryButtons);
     
-    layout->addWidget(itemButtons);
-    layout->addWidget(doorButtons);
-    layout->addWidget(inventoryButtons);
-
-	setLayout(layout);
+    Playfield *p;
+	p = Playfield::Instance();
+	
+	
+	
+	string s = p->getPlayer()->getCurrentRoom()->getDescription();
+	QString kamer = "You are in " + QString::fromUtf8(s.c_str());
+	
+    setWindowTitle(kamer);
 }
 
-void adventureGUI::buttonClicked()
+void adventureGUI::doorButtonClicked()
 {
 	// TODO:
 	// btn->text() (=QString) omzetten naar normal string 
@@ -49,6 +63,79 @@ void adventureGUI::buttonClicked()
 	{
 		QString value = "you walk through this door: " + btn->text();
 		QMessageBox::information(0, "button clicked text", value);
+				
+		QString Str = btn->text();
+		string str = Str.toStdString();
+		
+		Playfield *p;
+		p = Playfield::Instance();
+		
+		vector <string> input;
+		input.push_back("open");
+        input.push_back(str);
+        
+        game.processCommand(input);
+        
+		paint();
+		
+	}
+}
+
+void adventureGUI::inventoryButtonClicked()
+{
+	// TODO:
+	// btn->text() (=QString) omzetten naar normal string 
+	// getItemByDescription (description = btn->text());
+	// terug droppen of zo?
+	// redraw GUI
+	
+	QPushButton * btn = qobject_cast<QPushButton *>(QObject::sender());
+
+	if(btn != 0)
+	{
+		QString value = "you drop this item: " + btn->text();
+		QMessageBox::information(0, "button clicked text", value);
+				
+		QString Str = btn->text();
+		string str = Str.toStdString();
+		
+		vector <string> input;
+		input.push_back("drop");
+        input.push_back(str);
+        
+        game.processCommand(input);
+        
+		paint();
+		
+
+	}
+}
+
+void adventureGUI::itemButtonClicked()
+{
+	// TODO:
+	// btn->text() (=QString) omzetten naar normal string 
+	// getItemByDescription (description = btn->text());
+	// item in inventory steken
+	// redraw GUI
+	
+	QPushButton * btn = qobject_cast<QPushButton *>(QObject::sender());
+
+	if(btn != 0)
+	{
+		QString value = "you pick up this item: " + btn->text();
+		QMessageBox::information(0, "button clicked text", value);
+		
+		QString Str = btn->text();
+		string str = Str.toStdString();
+		
+		vector <string> input;
+		input.push_back("take");
+        input.push_back(str);
+        
+        game.processCommand(input);
+        
+		paint();
 	}
 }
 
@@ -68,10 +155,10 @@ void adventureGUI::createDoorButtons()
 	{
 		string s = (*iter)->getDescription();	
 		QString naam = QString::fromUtf8(s.c_str());
-		QPushButton * btn = new QPushButton(naam, this);
-
-		connect(btn, SIGNAL(clicked()), this, SLOT(buttonClicked()));
+		QPushButton * btn = new QPushButton(naam);
 		doorButtonsLayout->addWidget(btn);
+
+		connect(btn, SIGNAL(clicked()), this, SLOT(doorButtonClicked()));
 	}
 
 	doorButtons->setLayout(doorButtonsLayout);
@@ -85,7 +172,7 @@ void adventureGUI::createInventoryButtons()
 	Playfield *p;
 	p = Playfield::Instance();
 
-    QVBoxLayout *inventoryButtonsLayout = new QVBoxLayout;
+	inventoryButtons->setLayout(new QVBoxLayout);
     
 	vector <Item *>  inventory = p->getPlayer()->getInventory();
 	
@@ -94,14 +181,11 @@ void adventureGUI::createInventoryButtons()
 	{
 		string s = (*iter)->getDescription();	
 		QString naam = QString::fromUtf8(s.c_str());
-		QPushButton * btn = new QPushButton(naam, this);
+		QPushButton * btn = new QPushButton(naam);
 
-		//connect(btn, SIGNAL(clicked()), this, SLOT(buttonClicked()));
-		inventoryButtonsLayout->addWidget(btn);
-	}	
-
-	inventoryButtons->setLayout(inventoryButtonsLayout);
-
+		connect(btn, SIGNAL(clicked()), this, SLOT(inventoryButtonClicked()));
+		inventoryButtons->layout()->addWidget(btn);
+	}
 }
 
 void adventureGUI::createItemButtons()
@@ -120,9 +204,9 @@ void adventureGUI::createItemButtons()
 	{
 		string s = (*iter)->getDescription();	
 		QString naam = QString::fromUtf8(s.c_str());
-		QPushButton * btn = new QPushButton(naam, this);
+		QPushButton * btn = new QPushButton(naam);
 
-		//connect(btn, SIGNAL(clicked()), this, SLOT(buttonClicked()));
+		connect(btn, SIGNAL(clicked()), this, SLOT(itemButtonClicked()));
 		itemButtonsLayout->addWidget(btn);
 		
 	}

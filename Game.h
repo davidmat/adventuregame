@@ -23,8 +23,10 @@ public:
 	Game();
 	void play();
 	virtual ~Game();
-private:
 	void processCommand(vector <string> s);
+	
+private:
+	
 	void initCommands();
 	bool isCommandValid(string command);
 /*	bool isCommandValidForObject(string command, string objectType);
