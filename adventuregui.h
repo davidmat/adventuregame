@@ -17,9 +17,13 @@ public:
 
 private:
     Ui::adventureGUIClass ui;
-    void createSpinBoxes();
+    void createItemButtons();
+    void createDoorButtons();
+    void createInventoryButtons();
     
-    QGroupBox *spinBoxesGroup;
+    QGroupBox *itemButtons;
+    QGroupBox *doorButtons;
+    QGroupBox *inventoryButtons;
     
     
 private slots:

@@ -28,6 +28,7 @@ void Playfield::create()
 	//add stuff to rooms
 	Item * key = addItemToRoom("useful key", inside);
 	Item * table = addItemToRoom("table", outside);
+	Item * rubiks_cube = addItemToRoom("a rubiks cube", inside);
 	
 	//create door
 	Door * door = addDoor("an entrance", outside, inside, true, key);
