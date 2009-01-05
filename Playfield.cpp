@@ -144,9 +144,3 @@ Item* Playfield::addItemToInventory(string description)
 }
 
 
-
-/*	  Room * addRoom(string description);
-	  Door * addDoor(string description, Room * roomOne, Room * roomTwo, bool locked, Item * key);
-	  Item* addItemToRoom(string description, Room* room);
-	  Item* addItemToInventory(string description);  
-*/
