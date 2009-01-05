@@ -28,7 +28,7 @@ protected:
 
 private:
 	  void setPlayer(string name);
-	  Room * addRoom(string description, string extendedDefinition);
+	  Room * addRoom(string description, string extendedDefinition, string image);
 	  Door * addDoor(string description, Room * roomOne, Room * roomTwo, bool locked, Item * key);
 	  Item* addItemToRoom(string description, Room* room);
 	  Item* addItemToInventory(string description);  	

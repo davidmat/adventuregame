@@ -21,9 +21,9 @@ void Playfield::create()
 	setPlayer("ceiling cat");
 	
 	// create rooms;
-	Room* outside = addRoom("outside", "You are outside, where the trees are");
+	Room* outside = addRoom("outside", "You are outside, where the trees are", "");
 	
-	Room * inside = addRoom("inside", "You are inside. There are no more trees here");
+	Room * inside = addRoom("inside", "You are inside. There are no more trees here", "");
 	
 	//add stuff to rooms
 	Item * key = addItemToRoom("useful key", inside);
@@ -95,11 +95,12 @@ void Playfield::setPlayer(string name)
 	player->setName(name);
 }
 
-Room * Playfield::addRoom(string description, string extendedDescription)
+Room * Playfield::addRoom(string description, string extendedDescription, string image)
 {
 	Room * room = new Room();
 	room->setDescription(description);
 	room->setExtendedDescription(extendedDescription);
+	room->setImage(image);
 	
 	rooms.push_back(room);
 	

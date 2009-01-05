@@ -3,6 +3,7 @@
 Room::Room() : GameObject("room")
 {
     this->description = "";
+    this->imagePath="";
 }
 
 Room::~Room()
@@ -63,6 +64,16 @@ bool Room::takeItem(Item *item)
 		}
 	}
 	return false;	
+}
+
+void Room::setImage(string path)
+{
+	imagePath= path;
+}
+
+string Room::getImage()
+{
+	return imagePath;
 } 
 
 

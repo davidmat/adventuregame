@@ -20,6 +20,8 @@ public:
 	string getExtendedDescription();
 	void setExtendedDescription(string description);
 	void addDoor(Door * door);
+	void setImage(string imagePath);
+	string getImage();
 	void addItem(Item * item);
 	vector <Door *> getDoors();
 	vector <Item *> getItems();
@@ -27,6 +29,7 @@ public:
 	string getObjectType(){ return "room";};
 	
 private:
+	string imagePath;
 	string description;
 	string extendedDescription;
 	vector <Door *> doors;

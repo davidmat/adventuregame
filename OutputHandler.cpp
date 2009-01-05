@@ -177,7 +177,7 @@ void OutputHandler::print(string messageId, ...)
 		cout << "Output not implemented yet " << endl;
 	}
 	
-	cout << message << endl;
+	cout << message << flush;
 }
 
 string OutputHandler::getMessage()
