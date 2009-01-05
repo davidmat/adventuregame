@@ -59,9 +59,14 @@ void adventureGUI::paint()
 	
 	// pic of room
 	QLabel *imageLabel = new QLabel;
-	QImage image("img/conference_room.bmp");
+	QImage image("img/conference_room.bmp");	
 	imageLabel->setPixmap(QPixmap::fromImage(image));
-	layout()->addWidget( imageLabel );
+	layout()->addWidget( imageLabel );	
+	/*string s = p->getPlayer()->getCurrentRoom()->getImage();
+	QString path = QString::fromUtf8(s.c_str());		
+	QImage image(path);										// werkt nog niet!
+	imageLabel->setPixmap(QPixmap::fromImage(image));
+	layout()->addWidget( imageLabel );*/
 		
 	// heading
 	string s = p->getPlayer()->getCurrentRoom()->getDescription();
