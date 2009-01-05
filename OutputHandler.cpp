@@ -162,8 +162,8 @@ void OutputHandler::print(string messageId, ...)
 	}
 	else if(messageId=="open_nokey")
 	{
-		cout << "But, then, suddenly, unexpectedly, in a bizarre plot twist, it seems... * tum dum tum *" << endl;
-		cout << "You have key!" << endl;
+		cout << "But, then, suddenly, unexpectedly, in a bizarre plot twist, it seems... " << endl;
+		cout << "You have no key!" << endl;
 	}	 
 	else
 	{
