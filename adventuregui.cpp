@@ -6,6 +6,8 @@
 #include <QHBoxLayout>
 #include <QPushButton>
 #include <QMessageBox>
+#include <QTextBrowser>
+#include <QLabel>
 
 using namespace std;
 
@@ -20,6 +22,8 @@ adventureGUI::adventureGUI(QWidget *parent)
 	//ui.setupUi(this);
 	
 	setLayout(new QHBoxLayout);
+	
+
 	paint();
 }
 
@@ -30,6 +34,9 @@ void adventureGUI::paint()
 		if(child[i]->isWidgetType())
 	  		child[i]->deleteLater();   
 	
+	Playfield *p;
+	p = Playfield::Instance();
+	
 	createItemButtons();
 	createDoorButtons();
 	createInventoryButtons();
@@ -38,25 +45,34 @@ void adventureGUI::paint()
     layout()->addWidget(doorButtons);
     layout()->addWidget(inventoryButtons);
     
-    Playfield *p;
-	p = Playfield::Instance();
+    OutputHandler *o;
+    o = OutputHandler::Instance();
+    string message = o->getMessage();
+    QString qmessage = QString::fromUtf8(message.c_str());
+    
+    // textarea to print extra info
+    QTextBrowser *textBrowser = new QTextBrowser();
+	//textBrowser->setMinimumHeight (100);
+	//textBrowser->setMinimumHeight (200);
+	textBrowser->append(qmessage);
+	layout()->addWidget(textBrowser);
 	
-	
-	
+	// pic of room
+	QLabel *imageLabel = new QLabel;
+	QImage image("img/conference_room.bmp");
+	imageLabel->setPixmap(QPixmap::fromImage(image));
+	layout()->addWidget( imageLabel );
+		
+	// heading
 	string s = p->getPlayer()->getCurrentRoom()->getDescription();
 	QString kamer = "You are in " + QString::fromUtf8(s.c_str());
-	
     setWindowTitle(kamer);
+    
 }
 
 void adventureGUI::doorButtonClicked()
 {
-	// TODO:
-	// btn->text() (=QString) omzetten naar normal string 
-	// getDoorByDescription (description = btn->text());
-	// move oproepen op specifieke deur
-	// redraw GUI
-	
+
 	QPushButton * btn = qobject_cast<QPushButton *>(QObject::sender());
 
 	if(btn != 0)
@@ -83,12 +99,7 @@ void adventureGUI::doorButtonClicked()
 
 void adventureGUI::inventoryButtonClicked()
 {
-	// TODO:
-	// btn->text() (=QString) omzetten naar normal string 
-	// getItemByDescription (description = btn->text());
-	// terug droppen of zo?
-	// redraw GUI
-	
+
 	QPushButton * btn = qobject_cast<QPushButton *>(QObject::sender());
 
 	if(btn != 0)
@@ -106,19 +117,12 @@ void adventureGUI::inventoryButtonClicked()
         game.processCommand(input);
         
 		paint();
-		
-
 	}
 }
 
 void adventureGUI::itemButtonClicked()
 {
-	// TODO:
-	// btn->text() (=QString) omzetten naar normal string 
-	// getItemByDescription (description = btn->text());
-	// item in inventory steken
-	// redraw GUI
-	
+
 	QPushButton * btn = qobject_cast<QPushButton *>(QObject::sender());
 
 	if(btn != 0)
@@ -160,9 +164,7 @@ void adventureGUI::createDoorButtons()
 
 		connect(btn, SIGNAL(clicked()), this, SLOT(doorButtonClicked()));
 	}
-
 	doorButtons->setLayout(doorButtonsLayout);
-
 }
 
 void adventureGUI::createInventoryButtons()
@@ -210,44 +212,8 @@ void adventureGUI::createItemButtons()
 		itemButtonsLayout->addWidget(btn);
 		
 	}
-	
-
 	itemButtons->setLayout(itemButtonsLayout);
-	
-    /*QLabel *integerLabel = new QLabel(tr("Enter a value between "
-        "%1 and %2:").arg(-20).arg(20));
-    QSpinBox *integerSpinBox = new QSpinBox;
-    integerSpinBox->setRange(-20, 20);
-    integerSpinBox->setSingleStep(1);
-    integerSpinBox->setValue(0);
-
-    QLabel *zoomLabel = new QLabel(tr("Enter a zoom value between "
-        "%1 and %2:").arg(0).arg(1000));
-    QSpinBox *zoomSpinBox = new QSpinBox;
-    zoomSpinBox->setRange(0, 1000);
-    zoomSpinBox->setSingleStep(10);
-    zoomSpinBox->setSuffix("%");
-    zoomSpinBox->setSpecialValueText(tr("Automatic"));
-    zoomSpinBox->setValue(100);
-
-    QLabel *priceLabel = new QLabel(tr("Enter a price between "
-        "%1 and %2:").arg(0).arg(999));
-    QSpinBox *priceSpinBox = new QSpinBox;
-    priceSpinBox->setRange(0, 999);
-    priceSpinBox->setSingleStep(1);
-    priceSpinBox->setPrefix("$");Deuren
-    priceSpinBox->setValue(99);
-
-    QVBoxLayout *spinBoxLayout = new QVBoxLayout;
-    spinBoxLayout->addWidget(integerLabel);
-    spinBoxLayout->addWidget(integerSpinBox);
-    spinBoxLayout->addWidget(zoomLabel);
-    spinBoxLayout->addWidget(zoomSpinBox);
-    spinBoxLayout->addWidget(priceLabel);
-    spinBoxLayout->addWidget(priceSpinBox);
-    spinBoxesGroup->setLayout(spinBoxLayout);*/
 }
-
 
 adventureGUI::~adventureGUI()
 {
