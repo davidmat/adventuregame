@@ -15,11 +15,13 @@ class OutputHandler
 public:
       static OutputHandler* Instance();
       void print(string messageId, ...);
+      string getMessage();
 protected:
       OutputHandler();
       OutputHandler(const OutputHandler&);
       OutputHandler& operator= (const OutputHandler&);
 private:
+	  string message;
       static OutputHandler* pinstance;
 };
 

@@ -13,6 +13,7 @@ OutputHandler* OutputHandler::Instance ()
 OutputHandler::OutputHandler() 
 { 
     srand( time(NULL) );
+    message="";
 }
 
 void OutputHandler::print(string messageId, ...)
@@ -169,5 +170,12 @@ void OutputHandler::print(string messageId, ...)
 	{
 		cout << "Output not implemented yet " << endl;
 	}
+	
+	cout << message << endl;
 }
 
+string OutputHandler::getMessage()
+{
+	message = "test woohoo lol";
+	return message;
+}
