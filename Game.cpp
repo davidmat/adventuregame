@@ -150,12 +150,17 @@ void Game::processCommand(vector <string> command)
 		}
 		else
 		{
-			o->print("inventory");
+			string contents;
 			vector<Item *>::iterator iter;
 			for (iter = inv.begin(); iter!=inv.end(); iter++)
 			{
-				cout << " * "<< (*iter)->getDescription() << endl;
-			} 
+				contents += " * ";
+				contents += (*iter)->getDescription();
+				contents += "\n";
+			}
+			const char *buf = contents.c_str();
+			
+			o->print("inventory", buf); 
 		}
 	}
 	// DROP

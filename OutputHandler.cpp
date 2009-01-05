@@ -18,6 +18,11 @@ OutputHandler::OutputHandler()
 
 void OutputHandler::print(string messageId, ...)
 {
+	va_list arguments;
+	va_start ( arguments, messageId );
+	
+	//va_arg ( arguments, string );
+	
 	if(messageId=="welcome")
 	{
 		cout << "Welcome to the game!" <<endl;
@@ -95,9 +100,10 @@ void OutputHandler::print(string messageId, ...)
 		cout << "Reluctantly, you do so. There's:" << endl;
 	}
 		
-	else if(messageId=="inventory")
+	else if(messageId=="inventory") // must have extra argument
 	{
-		cout<< "Your inventory contains the following items: " << endl;
+		message = "Your inventory contains the following items: \n";
+		message += va_arg (arguments, char*);
 	}
 	else if(messageId=="inventory_empty")
 	{
