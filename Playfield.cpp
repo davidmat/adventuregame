@@ -21,23 +21,67 @@ void Playfield::create()
 	setPlayer("ceiling cat");
 	
 	// create rooms;
-	Room* outside = addRoom("outside", "You are outside, where the trees are", "");
 	
-	Room * inside = addRoom("inside", "You are inside. There are no more trees here", "");
+	//first floor
+	Room * frontyard = addRoom("front yard", "outside the main house, where the trees are", "");
+	Room * backyard = addRoom("back yard", "outside, behind the house. There is pond out here", "");
+	Room * gardenhouse = addRoom("garden house", "the small wooden building in the back yard", "");
+	Room * garage = addRoom("garage", "where the car sleeps", "");
+	Room * hallway = addRoom("hallway", "where you enter the house", "");
+	Room * livingroom = addRoom("living room", "where we live", "");
+	Room * kitchen = addRoom("kitchen", "where the munchies are made", "");
+	Room * storage = addRoom("storage room", "where the munchies are stored", "");
+	Room * veranda = addRoom("veranda", "between the kitchen and the back yard", "");
+	
+	//second floor
+	Room * bathroom = addRoom("bath room", "where the girls spent most of their time", "");
+	Room * landing = addRoom("landing", "the space to go from one room to the other", "");
+	Room * guestroom = addRoom("guest room", "where the guests sleep", "");
+	Room * bedroom = addRoom("bed room", "where you sleep", "");
+	Room * balcony = addRoom("balcony", "where you go get some air", "");
+	
+	//attic
+	Room * frontattic = addRoom("front side of the attic", "where they keep the garbage", "");
+	Room * backattic = addRoom("hidden back side of the attic", "where they hide stuff", "");
+	Room * vault = addRoom("vault", "where you win", "");
 	
 	//add stuff to rooms
-	Item * key = addItemToRoom("useful key", inside);
-	Item * table = addItemToRoom("table", outside);
-	Item * rubiks_cube = addItemToRoom("a rubiks cube", inside);
+	Item * kitchenkey = addItemToRoom("kitchen key", vault);
+	Item * garagekey = addItemToRoom("garage key", vault);
+	Item * bedroomkey = addItemToRoom("bedroom key", vault);
+	Item * elevatorbutton = addItemToRoom("elevator button", garage);
+	Item * bathroomkey = addItemToRoom("key to the bathroom", guestroom);
+	Item * ladder = addItemToRoom("strong ladder", storage);
+	Item * drill = addItemToRoom("heavy looking drill", garage);
+	Item * mainkey = addItemToRoom("key to the house", gardenhouse);
+	Item * table = addItemToRoom("table", frontyard);
+	Item * rubiks_cube = addItemToRoom("a rubiks cube", garage);
+	
 	
 	//create door
-	Door * door = addDoor("an entrance", outside, inside, true, key);
+	Door * fence = addDoor("fence", frontyard, backyard, false, NULL);
+	Door * gate = addDoor("gate", frontyard, garage, false, NULL);
+	Door * gardenhousedoor = addDoor("garden house door", backyard, gardenhouse, false, NULL);
+	Door * verandadoor = addDoor("veranda door", backyard, veranda, false, NULL);
+	Door * kitchendoor = addDoor("kitchen door", veranda, kitchen, true, kitchenkey);
+	Door * mainentrance = addDoor("main entrance", frontyard, hallway, true, mainkey);
+	Door * garagedoor = addDoor("garage door", garage, hallway, true, garagekey);
+	Door * elevator = addDoor("elevator", hallway, landing, true, elevatorbutton);
+	Door * livingdoor = addDoor("living/hallway door", hallway, livingroom, false, NULL);
+	Door * kitchenlivingdoor = addDoor("living/kitchen door", livingroom, kitchen, false, NULL);
+	Door * storagedoor = addDoor("storage door", kitchen, storage, false, NULL);
 	
-	//create second door
-	Door * door2 = addDoor("an exit", outside, inside, true, key);
+	Door * bathroomdoor = addDoor("bath room door", landing, bathroom, true, bathroomkey);
+	Door * bedroomdoor = addDoor("bedroom door", landing, bedroom, true, bedroomkey);
+	Door * guestroomdoor = addDoor("landing/guestroom door", landing, guestroom, false, NULL);
+	Door * balcony1 = addDoor("balcony/guestroom door", guestroom, balcony, false, NULL);
+	Door * balcony2 = addDoor("balcony/bedroom door", bedroom, balcony, false, NULL);
+	Door * hatch = addDoor("attic hatch", bedroom, frontattic, true, ladder);
+	Door * curtain = addDoor("curtain", frontattic, backattic, false, NULL);
+	Door * vaultdoor = addDoor("vault door", backattic, vault, true, drill);
 	
 	// set player location
-	player->setCurrentRoom(inside);
+	player->setCurrentRoom(frontyard);
 	
 	// add something to inventory;
 	Item * chair = addItemToInventory("a plain chair");

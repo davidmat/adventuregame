@@ -65,7 +65,7 @@ void adventureGUI::paint()
 		
 	// heading
 	string s = p->getPlayer()->getCurrentRoom()->getDescription();
-	QString kamer = "You are in " + QString::fromUtf8(s.c_str());
+	QString kamer = "You are in the " + QString::fromUtf8(s.c_str());
     setWindowTitle(kamer);    
 }
 
