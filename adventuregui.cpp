@@ -14,16 +14,10 @@ using namespace std;
 adventureGUI::adventureGUI(QWidget *parent)
     : QWidget(parent)
 {
-
-	// TODO: add pixmap van room
-	// links buttons met move, pickup, drop...
-	// soort van tekst terminal?
-	
+	// TODO: add pixmap van room	
 	//ui.setupUi(this);
 	
 	setLayout(new QHBoxLayout);
-	
-
 	paint();
 }
 
@@ -36,6 +30,7 @@ void adventureGUI::paint()
 	
 	Playfield *p;
 	p = Playfield::Instance();
+	
 	
 	createItemButtons();
 	createDoorButtons();
@@ -71,8 +66,7 @@ void adventureGUI::paint()
 	// heading
 	string s = p->getPlayer()->getCurrentRoom()->getDescription();
 	QString kamer = "You are in " + QString::fromUtf8(s.c_str());
-    setWindowTitle(kamer);
-    
+    setWindowTitle(kamer);    
 }
 
 void adventureGUI::doorButtonClicked()
@@ -82,8 +76,8 @@ void adventureGUI::doorButtonClicked()
 
 	if(btn != 0)
 	{
-		QString value = "you walk through this door: " + btn->text();
-		QMessageBox::information(0, "button clicked text", value);
+		//QString value = "you walk through this door: " + btn->text();
+		//QMessageBox::information(0, "button clicked text", value);
 				
 		QString Str = btn->text();
 		string str = Str.toStdString();
@@ -109,8 +103,8 @@ void adventureGUI::inventoryButtonClicked()
 
 	if(btn != 0)
 	{
-		QString value = "you drop this item: " + btn->text();
-		QMessageBox::information(0, "button clicked text", value);
+		//QString value = "you drop this item: " + btn->text();
+		//QMessageBox::information(0, "button clicked text", value);
 				
 		QString Str = btn->text();
 		string str = Str.toStdString();
@@ -132,8 +126,8 @@ void adventureGUI::itemButtonClicked()
 
 	if(btn != 0)
 	{
-		QString value = "you pick up this item: " + btn->text();
-		QMessageBox::information(0, "button clicked text", value);
+		//QString value = "you pick up this item: " + btn->text();
+		//QMessageBox::information(0, "button clicked text", value);
 		
 		QString Str = btn->text();
 		string str = Str.toStdString();
@@ -214,13 +208,11 @@ void adventureGUI::createItemButtons()
 		QPushButton * btn = new QPushButton(naam);
 
 		connect(btn, SIGNAL(clicked()), this, SLOT(itemButtonClicked()));
-		itemButtonsLayout->addWidget(btn);
-		
+		itemButtonsLayout->addWidget(btn);		
 	}
 	itemButtons->setLayout(itemButtonsLayout);
 }
 
 adventureGUI::~adventureGUI()
 {
-
 }
