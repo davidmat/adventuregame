@@ -23,37 +23,6 @@ void Game::play()
 	}
 	
 	o->print("goodbye");
-		
-	
-	/*
-	cout << "Your name is "<< p->getPlayer()->getName() <<"." << endl;
-
-	cout << "You are now "<<p->getPlayer()->getCurrentRoom()->getDescription() << endl;
-	
-	cout << "Type continue" <<endl;
-	commandHistory.push_back(parser->getInput());
-	if(commandHistory.back().front() == "continue")
-	{
-		cout << "understood" <<endl;
-		p->getPlayer()->move(p->getPlayer()->getCurrentRoom()->getDoors().back());
-		
-	}
-	cout << "You are now "<<p->getPlayer()->getCurrentRoom()->getDescription() << endl;
-	cout << "This is a " << p->getPlayer()->getCurrentRoom()->getObjectType() <<endl;
-	
-	Item chair(10, true, "chair");
-	Item iphone(10, true, "pink iPhone");
-	cout << chair.chucknorris() << endl;
-	cout << m->getMessage("lol") << endl;
-	Room a;
-	Room b;
-	Door door(&a, &b);
-	Room c=*(door.getRoomOne());
-	cout << door.getRoomOne()->getObjectType() <<endl;
-	cout << iphone.chucknorris();
-	*/
-
-	
 }
 
 void Game::processCommand(vector <string> command)
@@ -105,31 +74,36 @@ void Game::processCommand(vector <string> command)
 			{
 				o->print("look");
 				// describe the room
-				o->print("look_room");
-				cout << p->getPlayer()->getCurrentRoom()->getDescription()  << endl;
-				// extended description
-				// -> cout << p->getPlayer()->getCurrentRoom()->getExtendedDescription()<<endl;
+				string description = p->getPlayer()->getCurrentRoom()->getDescription();
+				string extended = p->getPlayer()->getCurrentRoom()->getExtendedDescription();
+				o->print("look_room", description.c_str(), extended.c_str());
 				// describe the items you see
 				vector <Item*> items = p->getPlayer()->getCurrentRoom()->getItems();
 				if(items.size()>0)
 				{
-					o->print("look_contents");
+					string contents;					
 					vector<Item *>::iterator iter;
 					for (iter = items.begin(); iter!=items.end(); iter++)
 					{
-						cout << " * "<< (*iter)->getDescription() << endl;
-					} 
+						contents += " * ";
+						contents += (*iter)->getDescription(); 
+						contents += "\n";
+					}
+					o->print("look_contents", contents.c_str()); 
 				}
 				// describe the doors
 				vector <Door *> doors = p->getPlayer()->getCurrentRoom()->getDoors();
 				if(doors.size()>0)
 				{
-					o->print("look_doors");
+					string doorz;
 					vector<Door *>::iterator iter;
 					for (iter = doors.begin(); iter!=doors.end(); iter++)
 					{
-						cout << " * "<< (*iter)->getDescription() << endl;
-					} 
+						doorz += " * ";
+						doorz += (*iter)->getDescription(); 
+						doorz += "\n";
+					}
+					o->print("look_doors", doorz.c_str()); 
 				}
 				
 			}
@@ -182,9 +156,9 @@ void Game::processCommand(vector <string> command)
 			{
 				if(p->getPlayer()->takeItem(item))
 				{
-					o->print("drop");
-					cout << item->getDescription() << endl;
+					string desc = item->getDescription();
 					p->getPlayer()->getCurrentRoom()->addItem(item);
+					o->print("drop", desc.c_str());
 				}
 			}
 		}
@@ -209,9 +183,9 @@ void Game::processCommand(vector <string> command)
 			{
 				if(p->getPlayer()->getCurrentRoom()->takeItem(item))
 				{
-					o->print("take");
-					cout << item->getDescription() << endl;
+					string desc = item->getDescription();
 					p->getPlayer()->addItem(item);
+					o->print("take", desc.c_str());
 				}
 			}
 		}
@@ -320,12 +294,8 @@ void Game::initCommands()
 	commandWords.push_back("quit"); 
 	commandWords.push_back("look");
 	commandWords.push_back("take");
-	//commandWords.push_back("use");
 	commandWords.push_back("open");
-	//commandWords.push_back("go");
-	//commandWords.push_back("unlock");
 	commandWords.push_back("drop");
-	//commandWords.push_back("lock");
 	commandWords.push_back("chuck");
 	commandWords.push_back("win");
 	commandWords.push_back("inventory");	
@@ -344,17 +314,6 @@ bool Game::isCommandValid(string command)
 	return match;
 }
 
-/* bool Game::isCommandValidForObject(string command, string objectType)
-{
-		return true;
-}
-
-vector <string> Game::getCommandsForObject(string objectType)
-{
-	vector <string> s;
-	return s;
-}
-*/
 Game::~Game()
 {
 }

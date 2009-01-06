@@ -25,79 +25,85 @@ void OutputHandler::print(string messageId, ...)
 	
 	if(messageId=="welcome")
 	{
-		cout << "Welcome to the game!" <<endl;
+		message = "Welcome to the game! \n";
 	}
 	else if(messageId=="help")
 	{
-		cout << "Game help: \n";
-		cout << "Available commands: \n";
-		cout << " * help: displays help message \n";
-		cout << " * exit, quit: end the game \n";
-		cout << " * look around: gives a description of your surroundings \n";
-		cout << " * inventory: tells you what's in your inventory \n"; 
-		cout << " * drop <item>: takes an item from your inventory and drops it on the floor \n";
-		cout << " * take <item>: pick up a item and put in in your inventory \n";
-		cout << " * open <door>: walk, through the rectangular hole of your choice, into the next room \n";
+		message = "Game help: \n";
+		message+= "Available commands: \n";
+		message+= " * help: displays help message \n";
+		message+= " * exit, quit: end the game \n";
+		message+= " * look around: gives a description of your surroundings \n";
+		message+= " * inventory: tells you what's in your inventory \n";
+		message+= " * drop <item>: takes an item from your inventory and drops it on the floor \n";
+		message+= " * take <item>: pick up a item and put in in your inventory \n";
+		message+= " * open <door>: walk, through the rectangular hole of your choice, into the next room \n";
 		
 		int choice = rand() % 3 + 1;
 		if(choice <=1)
 		{
-			cout << "You're welcome!" << endl;
+			message += "You're welcome! \n";
 		}
 		else if(choice <=2)
 		{	
-			cout << "Glad to be of assistance." <<endl;
+			message += "Glad to be of assistance. \n";
 		}
 		else
 		{
-			cout << "People who need help are weak." <<endl;
+			message += "People who need help are weak. \n";
 		}
 		
 	}
 	else if(messageId=="goodbye") 
 	{
-		cout << "Bye!!" <<endl;
+		message = "Bye!! \n";
 	}
 	else if(messageId=="sure")
 	{
-		cout << "Are you sure you want to quit? (yes/no)" << endl;
+		message = "Are you sure you want to quit? (yes/no) \n";
 	}
 	else if(messageId=="invalid")
 	{
-		cout << "I don't know what you mean... \n";
-		cout << "Type 'help' to see a list of available commands" << endl;
+		message = "I don't know what you mean... \n";
+		message+= "Type 'help' to see a list of available commands \n";
 	}
 	else if(messageId=="look_error")
 	{
-		cout << "You can't look at that, silly you!" << endl;
+		message = "You can't look at that, silly you! \n";
 		int choice = rand() % 2 + 1;
 		if(choice <=1)
 		{
-			cout << "That's not even funny!" << endl;
+			message += "That's not even funny! \n";
 		}
 		else
 		{
-			cout << "Your inferior intellect makes me weep" <<flush;
-			sleep(1);
-			cout << "... tears of joy." <<endl;
+			message += "Your inferior intellect makes me weep \n";
+			message+= "... tears of joy. \n";
 		}
 	}
 	else if(messageId=="look")
 	{
-		cout << "You decide to have a look around." << endl;
+		message = "You decide to have a look around. \n";
 	}
 	else if(messageId=="look_contents")
 	{
-		cout << "The room is full of stuff. You see: " << endl;
+		message = "The room is full of stuff. You see: \n";
+		message += va_arg (arguments, char*);
 	}
 	else if(messageId=="look_room")
 	{
-		cout << "You find yourself in a warm and happy place, more specifically: " << flush;
+		message = "You find yourself in a warm and happy place, more specifically: ";
+		message += va_arg (arguments, char*);
+		message += "\nIt's ";
+		message += va_arg (arguments, char*);
+		message += "\n";
+		
 	}
 	else if(messageId=="look_doors")
 	{
-		cout << "You remember from your training course at MI-6 that you're supposed to scan the room for exits." << endl;
-		cout << "Reluctantly, you do so. There's:" << endl;
+		message = "You remember from your training course at MI-6 that you're supposed to scan the room for exits. \n";
+		message+= "Reluctantly, you do so. There's: \n";
+		message += va_arg (arguments, char*);
 	}
 		
 	else if(messageId=="inventory") // must have extra argument
@@ -107,74 +113,85 @@ void OutputHandler::print(string messageId, ...)
 	}
 	else if(messageId=="inventory_empty")
 	{
-		cout << "Oh noes. Teh Inventories... they are empty!" << endl; 
+		message = "Oh noes. Teh Inventories... they are empty! \n"; 
 	}
 	else if(messageId=="drop")
 	{
-		cout << "You drop " << flush;
+		message = "You drop your ";
+		message += va_arg (arguments, char*);
+		message += " \n";
 	}
 	else if(messageId=="take")
 	{
-		cout << "Your mom comes running in and suddenly a new item appears in your backpack \n";
-		cout << "Oh yeah, and it also seems to have disappeared from the room \n";
-		cout << "Nevertheless, you decide to thoroughly enjouy your new " << flush;
+		int choice = rand() % 3 + 1;
+		if(choice > 2)
+		{
+			message = "You start yelling \n";
+			message += "MOOOMMMMYYYY! Pick up my ";
+			message += va_arg (arguments, char*);
+			message += "! NOW !! \n";
+			message += "She picks it up for you and hits you in the face with it. \n";
+			message += "Wow, that hurt. \n";
+		}
+		else
+		{
+			message = "You open you backpack and put the ";
+			message += va_arg (arguments, char*);
+			message += " in it \n" ;	
+		}
 	}
 	else if(messageId=="win")
 	{
-		cout <<"You win!" << endl;
-		cout <<"It doesn't seem to have changed anything" <<endl;
-		cout <<"Still, it did make you feel a little better inside" << endl;
+		message = "You win! \n";
+		message+= "It doesn't seem to have changed anything \n";
+		message+= "Still, it did make you feel a little better inside \n";
 	}
 	else if(messageId=="chucknorris")
 	{
-		cout <<"Chuck Norris doesn’t wear a watch, HE decides what .." << endl;
-		sleep(2);
-		cout <<"Oh no" << endl;
-		sleep(2);
-		cout <<"It's the Chuck... he's heeeeerrreeeee!!!" << endl;
-		sleep(2);
-		cout <<"CHUCK NORRIS SAYS: WHEN CHUCK NORRIS TALKS,EVERYBODY LISTENS." << endl;
-		sleep(4);
-		cout<<"AND DIES" << endl;
-		cout<< "*roundhouse kick*" <<endl;
-		cout<<"-- fly, zOOf, Boom, spLAT -- "<< endl;
-		cout<<"CHUCK NORRIS SAYS: GAME OVER SUCKA" << endl;
+		message= "Chuck Norris doesn’t wear a watch, HE decides what ..\n";
+		message+="Oh no \n";
+		message+="It's the Chuck... he's heeeeerrreeeee!!! \n";
+		message+="CHUCK NORRIS SAYS: WHEN CHUCK NORRIS TALKS,EVERYBODY LISTENS. \n";
+		message+="AND DIES \n";
+		message+="*roundhouse kick* \n";
+		message+="-- fly, zOOf, Boom, spLAT -- \n";
+		message+="CHUCK NORRIS SAYS: GAME OVER SUCKA \n";
 		
 	}
 	else if(messageId=="chuckwho")
 	{
-		cout << "Chuck WHO?" << endl;
-		cout << "There is only ONE Chuck" << endl;
-		cout << "And he is not amused" << endl;
-		cout << "You lose 50Million HP (Chuck Norris Face Kick)" <<endl;  
+		message="Chuck WHO? \n";
+		message+="There is only ONE Chuck \n";
+	    message+="And he is not amused \n";
+		message+="You lose 50 Million Billion HP (Chuck Norris Roundhouse Kick) \n";  
 	}
 	else if(messageId=="open_locked")
 	{
-		cout << "Fiercly, you try to open the door." << endl;
-		cout << "Sadly, it seems locked." << endl;
-		cout << "Luckily, there is a rocket launcher standing right next to it. " << endl;
-		cout << "Forcefully, you pick up the rocket launcher and prepare to blow up the door" << endl;
-		cout << "Angrily, you notice that the rocket launcher requires a key to get it started" << endl;
+		message= "Fiercly, you try to open the door. \n";
+		message+= "Sadly, it seems locked. \n";
+		message+= "Luckily, there is a rocket launcher standing right next to it. \n";
+		message+= "Forcefully, you pick up the rocket launcher and prepare to blow up the door \n";
+		message+= "Angrily, you notice that the rocket launcher requires a key to get it started \n";
 		 
 	}
 	else if(messageId=="open_unlocked")
 	{
-		cout << "You walk through the door" << endl;
+		message = "You walk through the door \n";
 	}
 	else if(messageId=="open_key")
 	{
-		cout << "You find the correct key in your inventory and put it in the rocket launcher" << endl;
-		cout << "It starts up beautifully and kindly opens the door for you. " << endl;
-		cout << "Thank you rocket launcher!" << endl;
+		message = "You find the correct key in your inventory and put it in the rocket launcher \n";
+		message+= "It starts up beautifully and kindly opens the door for you. \n";
+		message+= "Thank you rocket launcher! \n";
 	}
 	else if(messageId=="open_nokey")
 	{
-		cout << "But, then, suddenly, unexpectedly, in a bizarre plot twist, it seems... " << endl;
-		cout << "You have no key!" << endl;
+		message = "But, then, suddenly, unexpectedly, in a bizarre plot twist, it seems... \n";
+		message+="You have no key! \n";
 	}	 
 	else
 	{
-		cout << "Output not implemented yet " << endl;
+		message = "Output not implemented yet \n";
 	}
 	
 	cout << message << flush;
