@@ -199,6 +199,5 @@ void OutputHandler::print(string messageId, ...)
 
 string OutputHandler::getMessage()
 {
-	message = "test woohoo lol";
 	return message;
 }
