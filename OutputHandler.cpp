@@ -167,27 +167,38 @@ void OutputHandler::print(string messageId, ...)
 	}
 	else if(messageId=="open_locked")
 	{
-		message= "Fiercly, you try to open the door. \n";
+		message= "Fiercly, you try to open the ";
+		message += va_arg (arguments, char*); 
+		message+=". \n";
 		message+= "Sadly, it seems locked. \n";
-		message+= "Luckily, there is a rocket launcher standing right next to it. \n";
+		/*message+= "Luckily, there is a rocket launcher standing right next to it. \n";
 		message+= "Forcefully, you pick up the rocket launcher and prepare to blow up the door \n";
 		message+= "Angrily, you notice that the rocket launcher requires a key to get it started \n";
-		 
+		*/  
 	}
 	else if(messageId=="open_unlocked")
 	{
-		message = "You walk through the door \n";
+		message = "You walk through the ";
+		message += va_arg (arguments, char*); 
+		message+=". \n";
 	}
 	else if(messageId=="open_key")
 	{
-		message = "You find the correct key in your inventory and put it in the rocket launcher \n";
+		message =  "You open the ";
+		message += va_arg (arguments, char*); 
+		message += " with the ";
+		message += va_arg (arguments, char*); 
+		message += " from your backpack \n";  
+		/*message = "You find the correct key in your inventory and put it in the rocket launcher \n";
 		message+= "It starts up beautifully and kindly opens the door for you. \n";
-		message+= "Thank you rocket launcher! \n";
+		message+= "Thank you rocket launcher! \n"; */
 	}
 	else if(messageId=="open_nokey")
 	{
 		message = "But, then, suddenly, unexpectedly, in a bizarre plot twist, it seems... \n";
-		message+="You have no key! \n";
+		message+="You'll need to find a ";
+		message += va_arg (arguments, char*);  
+		message+="\n";
 	}	 
 	else
 	{

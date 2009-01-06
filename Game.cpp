@@ -233,11 +233,15 @@ void Game::processCommand(vector <string> command)
 			else
 			{
 				// door exists, is it locked?   
+    			string roomdesc = door->getDescription();
+    			
     			if(door->isLocked())
     			{
     				Item * key = door->getKey();
-    				bool found = false;
-        			o->print("open_locked");
+    				string keydesc = key->getDescription();
+    				
+    				bool found = false; 
+        			o->print("open_locked", roomdesc.c_str());
         			// check inventory for key
         			vector<Item *>::iterator iter;
 					for (iter = inv.begin(); iter!=inv.end(); iter++)
@@ -249,19 +253,20 @@ void Game::processCommand(vector <string> command)
 					}
 					if(found)
 					{
-						o->print("open_key");
+						
+						o->print("open_key", roomdesc.c_str(), keydesc.c_str());
 						door->unlock(key);
 					}
 					else
 					{
-						o->print("open_nokey");
+						o->print("open_nokey", keydesc.c_str());
 					} 
         			
        		        
     			}
     			if(!door->isLocked())
 				{
-					o->print("open_unlocked");
+					o->print("open_unlocked", roomdesc.c_str());
 					Room * r1 = door->getRoomOne();
         			Room * r2 = door->getRoomTwo();
         			if(currentRoom == r1)
