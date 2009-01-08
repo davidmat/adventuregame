@@ -23,30 +23,30 @@ void Playfield::create()
 	// create rooms;
 	
 	//first floor
-	Room * frontyard = addRoom("front yard", "outside the main house, where the trees are", "");
-	Room * backyard = addRoom("back yard", "outside, behind the house. There is pond out here", "");
-	Room * gardenhouse = addRoom("garden house", "the small wooden building in the back yard", "");
-	Room * garage = addRoom("garage", "where the car sleeps", "");
-	Room * hallway = addRoom("hallway", "where you enter the house", "");
-	Room * livingroom = addRoom("living room", "where we live", "");
-	Room * kitchen = addRoom("kitchen", "where the munchies are made", "");
-	Room * storage = addRoom("storage room", "where the munchies are stored", "");
-	Room * veranda = addRoom("veranda", "between the kitchen and the back yard", "");
+	Room * frontyard = addRoom("front yard", "outside the main house, where the trees are", "img/frontyard.png");
+	Room * backyard = addRoom("back yard", "outside, behind the house. There is pond out here", "img/backyard.png");
+	Room * gardenhouse = addRoom("garden house", "the small wooden building in the back yard", "img/gardenshed.png");
+	Room * garage = addRoom("garage", "where the car sleeps", "img/garage.png");
+	Room * hallway = addRoom("hallway", "where you enter the house", "img/hallway.png");
+	Room * livingroom = addRoom("living room", "where we live", "img/livingroom.png");
+	Room * kitchen = addRoom("kitchen", "where the munchies are made", "img/kitchen.png");
+	Room * storage = addRoom("storage room", "where the munchies are stored", "img/storage.png");
+	Room * veranda = addRoom("veranda", "between the kitchen and the back yard", "img/veranda.png");
 	
 	//second floor
-	Room * bathroom = addRoom("bath room", "where the girls spent most of their time", "");
-	Room * landing = addRoom("landing", "the space to go from one room to the other", "");
-	Room * guestroom = addRoom("guest room", "where the guests sleep", "");
-	Room * bedroom = addRoom("bed room", "where you sleep", "");
-	Room * balcony = addRoom("balcony", "where you go get some air", "");
+	Room * bathroom = addRoom("bath room", "where the girls spent most of their time", "img/bathroom.png");
+	Room * landing = addRoom("landing", "the space to go from one room to the other", "img/landing.png");
+	Room * guestroom = addRoom("guest room", "where the guests sleep", "img/guestroom.png");
+	Room * bedroom = addRoom("bed room", "where you sleep", "img/bedroom.png");
+	Room * balcony = addRoom("balcony", "where you go get some air", "img/balcony.png");
 	
 	//attic
-	Room * frontattic = addRoom("front side of the attic", "where they keep the garbage", "");
-	Room * backattic = addRoom("hidden back side of the attic", "where they hide stuff", "");
-	Room * vault = addRoom("vault", "where you win", "");
+	Room * frontattic = addRoom("front side of the attic", "where they keep the garbage", "img/frontattic.png");
+	Room * backattic = addRoom("hidden back side of the attic", "where they hide stuff", "img/backattic.png");
+	Room * vault = addRoom("vault", "where you win", "img/vault.png");
 	
 	//add stuff to rooms
-	Item * kitchenkey = addItemToRoom("kitchen key", vault);
+	Item * kitchenkey = addItemToRoom("kitchen key", balcony);
 	Item * garagekey = addItemToRoom("garage key", vault);
 	Item * bedroomkey = addItemToRoom("bedroom key", vault);
 	Item * elevatorbutton = addItemToRoom("elevator button", garage);
@@ -55,7 +55,8 @@ void Playfield::create()
 	Item * drill = addItemToRoom("heavy looking drill", garage);
 	Item * mainkey = addItemToRoom("key to the house", gardenhouse);
 	Item * table = addItemToRoom("table", frontyard);
-	Item * rubiks_cube = addItemToRoom("a rubiks cube", garage);
+	Item * rubiks_cube = addItemToRoom("rubiks cube", garage);
+	Item * horse = addItemToRoom("horse", hallway);
 	
 	
 	//create door

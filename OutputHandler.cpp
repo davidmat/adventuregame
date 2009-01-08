@@ -171,10 +171,6 @@ void OutputHandler::print(string messageId, ...)
 		message += va_arg (arguments, char*); 
 		message+=". \n";
 		message+= "Sadly, it seems locked. \n";
-		/*message+= "Luckily, there is a rocket launcher standing right next to it. \n";
-		message+= "Forcefully, you pick up the rocket launcher and prepare to blow up the door \n";
-		message+= "Angrily, you notice that the rocket launcher requires a key to get it started \n";
-		*/  
 	}
 	else if(messageId=="open_unlocked")
 	{
@@ -189,9 +185,6 @@ void OutputHandler::print(string messageId, ...)
 		message += " with the ";
 		message += va_arg (arguments, char*); 
 		message += " from your backpack \n";  
-		/*message = "You find the correct key in your inventory and put it in the rocket launcher \n";
-		message+= "It starts up beautifully and kindly opens the door for you. \n";
-		message+= "Thank you rocket launcher! \n"; */
 	}
 	else if(messageId=="open_nokey")
 	{
